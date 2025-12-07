@@ -11,8 +11,11 @@ RUN npm ci --only=production
 # Copy source code
 COPY backend/ .
 
-# Expose port
+# Expose port (Render will override with PORT env var)
 EXPOSE 5000
 
+# Set production environment
+ENV NODE_ENV=production
+
 # Start application
-CMD ["npm", "start"]
+CMD ["node", "src/app.js"]

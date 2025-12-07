@@ -76,11 +76,14 @@ app.use((err, req, res, next) => {
 
 // Start server
 const PORT = process.env.PORT || 5000;
+const HOST = '0.0.0.0';
 
 // Graceful shutdown handler
-const server = app.listen(PORT, () => {
-  console.log(`✅ Server running in ${process.env.NODE_ENV || 'development'} mode on port ${PORT}`);
+const server = app.listen(PORT, HOST, () => {
+  console.log(`✅ Server running in ${process.env.NODE_ENV || 'development'} mode on ${HOST}:${PORT}`);
   console.log(`📡 Health check: http://localhost:${PORT}/health`);
+  console.log(`🔐 MongoDB: ${process.env.MONGO_URI ? 'Connected' : 'Not configured'}`);
+  console.log(`🔑 JWT Secret: ${process.env.JWT_SECRET ? 'Configured' : 'Missing'}`);
 });
 
 // Handle unhandled promise rejections
